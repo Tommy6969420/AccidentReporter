@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Reporter</title>
+</head>
+
+<body>
+      {% if longitude and latitude %} 
+        <h2>Report Submitted</h2>
+        <p><strong>Report:</strong> {{ report }}</p>
+        <p><strong>Latitude:</strong> {{ latitude }}</p>
+        <p><strong>Longitude:</strong> {{ longitude }}</p>
+   
+    {% else %}
+        <h1>Welcome to Accident Reporter</h1>
+        <p>Please fill out the form below to report an accident.</p>
+   
+
+    <form action="{% url 'index' %}" method="post">
+
+        {% csrf_token %}
+        <label for="report">Report an Accident:</label>
+        <textarea id="report" name="report" rows="4" cols="50"></textarea><br>
+        <label for="location">Location:</label>
+        <label>Latitude: <input type="text" id="latitude" name="latitude" readonly></label><br>
+        <label>Longitude: <input type="text" id="longitude" name="longitude" readonly></label><br>
+        <input type="submit" value="Submit Report" onclick="getLocation()">
+    </form>
+     {% endif %}
+  
+    <script>
+
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        document.addEventListener("DOMContentLoaded", (event) => {
+         
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(success, error);
+                } else {
+                    longitudeInput.value = "Geolocation is not supported by this browser.";
+            }
+    })
+            function success(position) {
+                latitudeInput.value = position.coords.latitude;
+                 longitudeInput.value = position.coords.longitude; 
+
+            }
+
+            function error() {
+                alert("Sorry, no position available.");
+            }
+    
+    </script>
+
+    </script>
+</body>
+
+</html>
