@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+</head>
+<body style="background-color: beige;">
+    {% for report in reports %}
+     {% if report.urgency == 'high' %}
+        <div class="report" style="border: 1px solid #f00707; padding: 10px; margin: 10px;">
+            <h3>Report ID: {{ report.id }}</h3>
+            <p><strong>Report:</strong> {{ report.report }}</p>
+            <p><strong>Latitude:</strong> {{ report.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ report.longitude }}</p>
+            <p><strong>Urgency:</strong> {{ report.urgency }}</p>
+            <p><strong>Date and Time:</strong> {{ report.datetime }}</p>
+            <span style="color: red; background-color: aliceblue; border: #f0d907;" >This report is marked as high urgency!</span>
+        </div>
+        {% elif report.urgency == 'medium' %}
+        <div class="report" style="border: 1px solid #f0d907; padding: 10px; margin: 10px;">
+            <h3>Report ID: {{ report.id }}</h3>
+            <p><strong>Report:</strong> {{ report.report }}</p>
+            <p><strong>Latitude:</strong> {{ report.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ report.longitude }}</p>
+            <p><strong>Urgency:</strong> {{ report.urgency }}</p>
+            <p><strong>Date and Time:</strong> {{ report.datetime }}</p>
+            <span style="color: rgb(255, 217, 0); background-color: rgb(2, 52, 95); border: #f0d907;" >This report is marked as medium urgency!</span>
+
+        </div>
+        {% else %}
+         <div class="report" style="border: 1px solid #0ff007; padding: 10px; margin: 10px;">
+            <h3>Report ID: {{ report.id }}</h3>
+            <p><strong>Report:</strong> {{ report.report }}</p>
+            <p><strong>Latitude:</strong> {{ report.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ report.longitude }}</p>
+            <p><strong>Urgency:</strong> {{ report.urgency }}</p>
+            <p><strong>Date and Time:</strong> {{ report.datetime }}</p>
+            <span style="color: rgb(72, 255, 0); background-color: rgb(10, 134, 241); border: #f0d907;" >This report is marked as low urgency!</span>
+        </div>
+        {% endif %}
+    {% empty %}
+        <p>No reports available.</p>
+    {% endfor %}
+</body>
+</html>
